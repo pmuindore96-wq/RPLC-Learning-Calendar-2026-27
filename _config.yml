@@ -1,0 +1,72 @@
+# GitHub Pages Configuration
+# RPLC Learning Calendar 2026-27
+
+# Theme
+theme: null
+
+# Site Configuration
+title: RPLC Learning Calendar 2026-27
+description: Regenerative Agriculture Training Platform
+url: https://pmuindore96-wq.github.io
+baseurl: /RPLC-Learning-Calendar-2026-27
+
+# Build Settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+
+# Exclude Jekyll from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Include dotfiles
+include:
+  - .nojekyll
+
+# Permalink structure
+permalink: /:title/
+
+# Collections (for future use)
+collections:
+  months:
+    output: true
+    permalink: /months/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Sass/SCSS Configuration
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Timezone
+timezone: Asia/Kolkata
+
+# Author Information
+author:
+  name: RPLC Team
+  email: pmuindore96@gmail.com
+  github: pmuindore96-wq
+
+# Social Links
+social:
+  links:
+    - https://github.com/pmuindore96-wq/RPLC-Learning-Calendar-2026-27
+
+# Google Analytics (optional - add your tracking ID)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Environment
+environment: production
