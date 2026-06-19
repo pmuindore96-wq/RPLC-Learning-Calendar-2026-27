@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RPLC Learning Calendar - Regenerative Agriculture Training Platform">
+    <meta name="theme-color" content="#1a5f3f">
+    <title>RPLC Learning Calendar 2026-27 | Regenerative Agriculture</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 bg-gradient-to-r from-green-800 to-green-700 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between gap-4">
+                <!-- Logo & Title -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                        <i class="fas fa-leaf text-green-700 text-lg"></i>
+                    </div>
+                    <div class="hidden sm:block">
+                        <h1 class="text-lg sm:text-xl font-bold leading-tight">RPLC Calendar</h1>
+                        <p class="text-xs sm:text-sm text-green-100">Regenerative Agriculture</p>
+                    </div>
+                </div>
+
+                <!-- Center Info -->
+                <div class="flex-1 text-center hidden md:block">
+                    <p class="text-sm font-semibold" id="currentMonth">January 2026</p>
+                    <p class="text-xs text-green-100" id="currentSeason">Rabi Season</p>
+                </div>
+
+                <!-- Language Toggle -->
+                <div class="flex items-center gap-2 bg-green-900 rounded-lg p-1">
+                    <button id="langEN" class="language-toggle active px-3 py-1 rounded text-sm font-semibold bg-white text-green-700" data-lang="en">EN</button>
+                    <button id="langHI" class="language-toggle px-3 py-1 rounded text-sm font-semibold text-white" data-lang="hi">HI</button>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 hover:bg-green-600 rounded-lg transition">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        <!-- SIDEBAR -->
+        <aside id="sidebar" class="md:col-span-1 hidden md:block">
+            <!-- Month Accordion -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                <h3 class="bg-green-700 text-white px-4 py-3 font-bold text-sm flex items-center gap-2">
+                    <i class="fas fa-calendar"></i>
+                    <span id="sidebarMonthTitle">Monthly Plan</span>
+                </h3>
+                <div id="monthAccordion" class="divide-y">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <h3 class="bg-blue-600 text-white px-4 py-3 font-bold text-sm flex items-center gap-2">
+                    <i class="fas fa-link"></i>
+                    <span id="quickLinksTitle">Quick Links</span>
+                </h3>
+                <ul class="divide-y">
+                    <li><a href="pages/onboarding.html" class="block px-4 py-3 hover:bg-blue-50 text-sm transition" id="linkOnboarding">VRP Onboarding</a></li>
+                    <li><a href="pages/vrp-role.html" class="block px-4 py-3 hover:bg-blue-50 text-sm transition" id="linkRoles">VRP Role Definition</a></li>
+                    <li><a href="pages/farm-diary.html" class="block px-4 py-3 hover:bg-blue-50 text-sm transition" id="linkDiary">Farm Diary</a></li>
+                    <li><a href="pages/inspection.html" class="block px-4 py-3 hover:bg-blue-50 text-sm transition" id="linkInspection">Compliance Checklist</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="md:col-span-3">
+
+            <!-- 4-TILE DASHBOARD -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <!-- Tile 1: Crop Status (Green) -->
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6 shadow-lg hover:shadow-xl transform hover:scale-105 transition cursor-pointer" onclick="scrollToSection('cropStatus')">
+                    <div class="flex flex-col items-center gap-3">
+                        <i class="fas fa-wheat-awn text-4xl opacity-80"></i>
+                        <h3 class="font-bold text-center text-sm sm:text-base" id="tile1Title">Crop Status</h3>
+                        <p class="text-xs opacity-90 text-center" id="tile1Desc">Current Field Condition</p>
+                    </div>
+                </div>
+
+                <!-- Tile 2: Training Sessions (Blue) -->
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-xl p-6 shadow-lg hover:shadow-xl transform hover:scale-105 transition cursor-pointer" onclick="scrollToSection('trainingSessions')">
+                    <div class="flex flex-col items-center gap-3">
+                        <i class="fas fa-chalkboard-user text-4xl opacity-80"></i>
+                        <h3 class="font-bold text-center text-sm sm:text-base" id="tile2Title">Training</h3>
+                        <p class="text-xs opacity-90 text-center" id="tile2Desc">Learning Sessions</p>
+                    </div>
+                </div>
+
+                <!-- Tile 3: Activities (Orange) -->
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-xl p-6 shadow-lg hover:shadow-xl transform hover:scale-105 transition cursor-pointer" onclick="scrollToSection('activities')">
+                    <div class="flex flex-col items-center gap-3">
+                        <i class="fas fa-tasks text-4xl opacity-80"></i>
+                        <h3 class="font-bold text-center text-sm sm:text-base" id="tile3Title">Activities</h3>
+                        <p class="text-xs opacity-90 text-center" id="tile3Desc">Field Work Plan</p>
+                    </div>
+                </div>
+
+                <!-- Tile 4: Training Videos (Purple) -->
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl p-6 shadow-lg hover:shadow-xl transform hover:scale-105 transition cursor-pointer" onclick="scrollToSection('videos')">
+                    <div class="flex flex-col items-center gap-3">
+                        <i class="fas fa-video text-4xl opacity-80"></i>
+                        <h3 class="font-bold text-center text-sm sm:text-base" id="tile4Title">Videos</h3>
+                        <p class="text-xs opacity-90 text-center" id="tile4Desc">Training Resources</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTENT SECTIONS -->
+
+            <!-- Crop Status Section -->
+            <section id="cropStatus" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-green-700 mb-4 flex items-center gap-2">
+                    <i class="fas fa-leaf"></i>
+                    <span id="cropStatusTitle">Crop & Field Status</span>
+                </h2>
+                <div id="cropStatusContent" class="text-gray-700 space-y-4">
+                    <!-- Content loaded from data -->
+                </div>
+                <div class="mt-4 p-4 bg-green-50 border-l-4 border-green-500 rounded">
+                    <p class="text-sm text-gray-600">
+                        <i class="fas fa-lightbulb text-yellow-500"></i>
+                        <strong id="cropStatusTip">Tip:</strong>
+                        <span id="cropStatusTipText">Regular soil monitoring ensures optimal plant growth.</span>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Training Sessions Section -->
+            <section id="trainingSessions" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-blue-700 mb-4 flex items-center gap-2">
+                    <i class="fas fa-chalkboard"></i>
+                    <span id="trainingTitle">Training Sessions</span>
+                </h2>
+                <div id="trainingContent" class="space-y-4">
+                    <!-- Sessions loaded from data -->
+                </div>
+            </section>
+
+            <!-- Activities Section -->
+            <section id="activities" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-orange-700 mb-4 flex items-center gap-2">
+                    <i class="fas fa-list-check"></i>
+                    <span id="activitiesTitle">Field Activities</span>
+                </h2>
+                <div id="activitiesContent" class="space-y-3">
+                    <!-- Activities loaded from data -->
+                </div>
+            </section>
+
+            <!-- Videos Section -->
+            <section id="videos" class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-purple-700 mb-4 flex items-center gap-2">
+                    <i class="fas fa-play-circle"></i>
+                    <span id="videosTitle">Training Videos</span>
+                </h2>
+                <div id="videosContent" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Videos loaded from data -->
+                </div>
+            </section>
+
+            <!-- Regenerative Topics Overview -->
+            <section class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4" id="topicsTitle">7 Regenerative Agriculture Topics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Topics dynamically populated -->
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-green-500">
+                        <h3 class="font-bold text-green-700 mb-2">🌱 Soil Health</h3>
+                        <p class="text-sm text-gray-600">Building fertile, living soil through organic matter and biodiversity.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-blue-500">
+                        <h3 class="font-bold text-blue-700 mb-2">💨 GHG Emission Reduction</h3>
+                        <p class="text-sm text-gray-600">Minimizing methane and carbon emissions through sustainable practices.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-amber-500">
+                        <h3 class="font-bold text-amber-700 mb-2">💰 Living Income</h3>
+                        <p class="text-sm text-gray-600">Ensuring farmers earn sustainable income through value-added products.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-cyan-500">
+                        <h3 class="font-bold text-cyan-700 mb-2">💧 Water Management</h3>
+                        <p class="text-sm text-gray-600">Conserving water and improving irrigation efficiency.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-red-500">
+                        <h3 class="font-bold text-red-700 mb-2">🦋 Biodiversity Preservation</h3>
+                        <p class="text-sm text-gray-600">Protecting crops, pollinators, and ecosystem diversity.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-pink-500">
+                        <h3 class="font-bold text-pink-700 mb-2">👩‍🌾 Gender Equity</h3>
+                        <p class="text-sm text-gray-600">Empowering women farmers in regenerative agriculture practices.</p>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border-l-4 border-indigo-500">
+                        <h3 class="font-bold text-indigo-700 mb-2">🐄 Animal Welfare</h3>
+                        <p class="text-sm text-gray-600">Integrating livestock sustainably with humane care standards.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="footerAbout">About</span>
+                    </h4>
+                    <p class="text-sm text-gray-400" id="footerAboutText">
+                        Supporting RPLC's Action for Social Advancement (ASA) initiative through regenerative agriculture training.
+                    </p>
+                </div>
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-books"></i>
+                        <span id="footerResources">Resources</span>
+                    </h4>
+                    <ul class="text-sm space-y-2">
+                        <li><a href="#" class="hover:text-white transition" id="footerGuide">User Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition" id="footerContact">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition" id="footerFeedback">Feedback</a></li>
+                    </ul>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-phone"></i>
+                        <span id="footerContactTitle">Contact</span>
+                    </h4>
+                    <p class="text-sm text-gray-400">
+                        <span id="footerEmail">Email: info@rplc.org</span><br>
+                        <span id="footerPhone">Phone: +91-XXXX-XXXX</span>
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
+                <p id="footerCopy">&copy; 2026 RPLC Learning Calendar. All rights reserved.</p>
+                <p class="text-xs mt-2 text-gray-600">Empowering regenerative agriculture across India 🌱</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"></div>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/language.js"></script>
+    <script src="assets/js/calendar.js"></script>
+    <script src="assets/js/accordion.js"></script>
+    <script src="assets/js/data-loader.js"></script>
+    <script src="assets/js/app.js"></script>
+
+</body>
+</html>
